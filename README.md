@@ -13,7 +13,7 @@ npm install gatsby-remark-embed-wordpress
 2. Add following to your `gatsby-config.js`:
 
 ```js
-    plugins: [      
+    plugins: [
       {
         resolve: "gatsby-transformer-remark",
         options: {

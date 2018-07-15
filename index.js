@@ -1,47 +1,23 @@
-'use strict';
-
+'use strict'
 const visit = require(`unist-util-visit`);
-const request = require(`request`);
 
-module.export = ({ markdownAST }, options = { width: 600, height: 380 }) => {
+module.exports = ({ markdownAST }, options = { width: 600, height: 380 }) => {
 	function validUrlCheck(useRimput) {
 		var inpu = useRimput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
 		if (inpu == null) return false;else return true;
 	}
+  visit(markdownAST, `inlineCode`, node => {
+    const { value } = node
 
-	function urlFind(vals) {
-		urlVars = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g;
+    if (value.startsWith(`wpEmbed:`)) {
+      const WpostUrl = value.substr(8)
 
-		return vals.replace(urlVars, function (url) {
-			return url;
-		});
-	}
+      if (validUrlCheck(WpostUrl)) {
+		node.type = `html`;
+		node.value = `<iframe sandbox="allow-scripts" security="restricted" src="${WpostUrl}/embed" width="${options.width}" height="${options.height}" title="" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>`;
+      }
+    }
+  })
 
-	function createoEmbedUri(validUri) {
-		//Make WordPress oEmbedURL with func
-		return urlFind(validUri) + '/wp-json/oembed/1.0/embed?url=' + urlEncode(validUri) + '&format=json';
-	}
-
-	visit(markdownAST, `inlineCode`, node => {
-		const { value } = node;
-
-		if (value.startsWith(`wpEmbed:`)) {
-			const WpostUrl = value.substr(8);
-
-			if (validUrlCheck(WpostUrl)) {
-
-				var dok = request({
-					url: createoEmbedUri(WpostUrl),
-					json: true
-				}, function (error, response, body) {
-					if (!error && response.statusCode === 200) {
-						console.log(body);
-					}
-				});
-				node.type = `html`;
-				node.value = dok;
-			}
-		}
-	});
-	return markdownAST;
-};
+  return markdownAST
+}

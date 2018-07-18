@@ -1,6 +1,6 @@
 {
   "name": "gatsby-remark-embed-wordpress",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Embed WordPress based posts URIs ",
   "main": "index.js",
   "scripts": {

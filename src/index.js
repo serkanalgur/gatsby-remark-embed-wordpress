@@ -1,6 +1,8 @@
 'use strict';
+
 const visit = require(`unist-util-visit`);
-module.export = ({ markdownAST }, options = { width: 600, height: 380 }) => {
+
+module.exports = ({markdownAST}, options = { width: 600, height: 380 }) => {
 	function validUrlCheck(useRimput) {
 		var inpu = useRimput.match(
 			/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
@@ -8,6 +10,7 @@ module.export = ({ markdownAST }, options = { width: 600, height: 380 }) => {
 		if (inpu == null) return false
 		else return true
 	}
+
 	visit(markdownAST, `inlineCode`, node => {
 		const {value} = node
 

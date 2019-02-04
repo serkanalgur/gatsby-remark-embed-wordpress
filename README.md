@@ -1,4 +1,6 @@
 # gatsby-remark-embed-wordpress
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fserkanalgur%2Fgatsby-remark-embed-wordpress.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fserkanalgur%2Fgatsby-remark-embed-wordpress?ref=badge_shield)
+
 
 Embed WordPress Site's posts in your Markdown
 
@@ -41,3 +43,5 @@ npm install gatsby-remark-embed-wordpress
 ## License
 
 GPLv3
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fserkanalgur%2Fgatsby-remark-embed-wordpress.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fserkanalgur%2Fgatsby-remark-embed-wordpress?ref=badge_large)
